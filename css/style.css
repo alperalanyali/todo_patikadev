@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-ul {
+ul { 
   margin: 0;
   padding: 0;
 }
@@ -14,8 +14,7 @@ ul li {
   background: #eee;
   font-size: 18px;
   transition: 0.2s;
-  list-style-type: none;
-
+  list-style-type: none;  
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -34,6 +33,10 @@ ul li.checked {
   background: #276678;
   color: #fff;
   text-decoration: line-through;
+}
+
+.checked{
+  background-color: #276678;
 }
 
 ul li.checked::before {
