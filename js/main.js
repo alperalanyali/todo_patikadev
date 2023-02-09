@@ -3,21 +3,18 @@ let todos = [
 ];
 if(localStorage.getItem("todos") !== null){
     todos =  JSON.parse(localStorage.getItem("todos"));
+    getTodos();
 }
-let listDOM = document.querySelector('#list');
+
 function getTodos(){
+    let listDOM = document.querySelector('#list');
     listDOM.innerHTML = '';
     todos.forEach(item =>{        
         let liElement = `
-                <div class="row"  id = ${item.id}>
-                    <div class="col-9">
-                            ${item.taskName}
-                    </div>
-                    <div class="col-3 float-right">
-                    <button onclick="completeTodo('${item.id}')" class="btn btn-outline-primary btn-sm"><i class="fa fa-check"></i></button>
-                        <button onclick="removeElement('${item.id}')" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    </div>
-                </div>
+            <li  id="${item.id}">${item.taskName}
+            <button class="btn btn-outline-primary" onclick="completeTodo(${item.id})"><i class="fa fa-check"></i></button>
+            <button class="btn btn-outline-danger" onclick="removeElement(${item.id})"><i class="fa-solid fa-xmark"></i></button>
+            </li>
         `;
         listDOM.insertAdjacentHTML("beforeend", liElement);
     });
@@ -34,13 +31,19 @@ function newElement(){
         getTodos();
         task.value = '';
         localStorage.setItem('todos', JSON.stringify(todos));
+        var toastDomSuccess = document.querySelector("#liveToast2");
+        var toast = new bootstrap.Toast(toastDomSuccess);
+        toast.show();
     }else {
+
+        var toastError = document.querySelector("#liveToast");
+        var toast = new bootstrap.Toast(toastError);
+        toast.show();
         console.log("Error");
     }
 }
 
-function removeElement(id){
-    
+function removeElement(id){    
     let deletedID;
     for (let index in todos) {
         if(todos[index].id == id) {
@@ -65,5 +68,6 @@ function completeTodo(id) {
         classList.remove("checked")
     }else{
         classList.add("checked");
+        
     }
 }
